@@ -105,8 +105,6 @@ set(
   BVH/BV_splitter.cpp
   collision_func_matrix.cpp
   collision_utility.cpp
-  mesh_loader/assimp.cpp
-  mesh_loader/loader.cpp
   hfield.cpp
 )
 
@@ -165,14 +163,6 @@ target_compile_definitions(${PROJECT_NAME} INTERFACE ${PUBLIC_DEFINITIONS})
 # IDE sources and headers sorting
 ADD_SOURCE_GROUP(${LIBRARY_NAME}_SOURCES)
 ADD_HEADER_GROUP(PROJECT_HEADERS_FULL_PATH)
-
-MODERNIZE_TARGET_LINK_LIBRARIES(
-  ${LIBRARY_NAME}
-  SCOPE PRIVATE
-  TARGETS assimp::assimp
-  LIBRARIES ${assimp_LIBRARIES}
-  INCLUDE_DIRS ${assimp_INCLUDE_DIR}
-)
 
 if(COAL_ENABLE_LOGGING)
   target_link_libraries(${LIBRARY_NAME} PUBLIC Boost::log)

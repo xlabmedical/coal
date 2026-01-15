@@ -117,11 +117,6 @@ include("${JRL_CMAKE_MODULES}/apple.cmake")
 include("${JRL_CMAKE_MODULES}/ide.cmake")
 include(CMakeDependentOption)
 
-set(
-  CMAKE_MODULE_PATH
-  ${JRL_CMAKE_MODULES}/find-external/assimp/
-  ${CMAKE_MODULE_PATH}
-)
 
 function(set_standard_output_directory target)
   set_target_properties(
@@ -180,8 +175,6 @@ option(COAL_HAS_QHULL "use qhull library to compute convex hulls." FALSE)
 if(COAL_HAS_QHULL)
   find_package(Qhull REQUIRED COMPONENTS qhull_r qhullcpp)
 endif()
-
-find_package(assimp REQUIRED)
 
 set(
   ${PROJECT_NAME}_HEADERS
@@ -263,8 +256,6 @@ set(
   include/coal/hfield.h
   include/coal/fwd.hh
   include/coal/logging.h
-  include/coal/mesh_loader/assimp.h
-  include/coal/mesh_loader/loader.h
   include/coal/internal/BV_fitter.h
   include/coal/internal/BV_splitter.h
   include/coal/internal/shape_shape_func.h
@@ -373,8 +364,6 @@ if(
     include/hpp/fcl/math/transform.h
     include/hpp/fcl/math/types.h
     include/hpp/fcl/math/vec_3f.h
-    include/hpp/fcl/mesh_loader/assimp.h
-    include/hpp/fcl/mesh_loader/loader.h
     include/hpp/fcl/narrowphase/gjk.h
     include/hpp/fcl/narrowphase/minkowski_difference.h
     include/hpp/fcl/narrowphase/narrowphase_defaults.h
@@ -404,7 +393,6 @@ if(COAL_HAS_OCTOMAP)
     APPEND
     ${PROJECT_NAME}_HEADERS
     include/coal/octree.h
-    include/coal/serialization/octree.h
     include/coal/internal/traversal_node_octree.h
   )
 endif(COAL_HAS_OCTOMAP)

@@ -96,7 +96,7 @@ void generateBVHModel(BVHModel<BV>& model, const Sphere& shape,
 
   CoalScalar r = shape.radius;
   CoalScalar phi, phid;
-  const CoalScalar pi = std::numbers::pi_v<CoalScalar>();
+  const CoalScalar pi = std::numbers::pi_v<CoalScalar>;
   phid = pi * 2 / seg;
   phi = 0;
 
@@ -178,7 +178,7 @@ void generateBVHModel(BVHModel<BV>& model, const Cylinder& shape,
   CoalScalar r = shape.radius;
   CoalScalar h = shape.halfLength;
   CoalScalar phi, phid;
-  const CoalScalar pi = std::numbers::pi_v<CoalScalar>();
+  const CoalScalar pi = std::numbers::pi_v<CoalScalar>;
   phid = pi * 2 / tot;
   phi = 0;
 
@@ -248,7 +248,7 @@ void generateBVHModel(BVHModel<BV>& model, const Cylinder& shape,
   CoalScalar r = shape.radius;
   CoalScalar h = 2 * shape.halfLength;
 
-  const CoalScalar pi = std::numbers::pi_v<CoalScalar>();
+  const CoalScalar pi = std::numbers::pi_v<CoalScalar>;
   unsigned int tot = (unsigned int)(tot_for_unit_cylinder * r);
   CoalScalar phid = pi * 2 / tot;
 
@@ -271,7 +271,7 @@ void generateBVHModel(BVHModel<BV>& model, const Cone& shape,
   CoalScalar h = shape.halfLength;
 
   CoalScalar phi, phid;
-  const CoalScalar pi = std::numbers::pi_v<CoalScalar>();
+  const CoalScalar pi = std::numbers::pi_v<CoalScalar>;
   phid = pi * 2 / tot;
   phi = 0;
 
@@ -339,7 +339,7 @@ void generateBVHModel(BVHModel<BV>& model, const Cone& shape,
   CoalScalar r = shape.radius;
   CoalScalar h = 2 * shape.halfLength;
 
-  const CoalScalar pi = std::numbers::pi_v<CoalScalar>();
+  const CoalScalar pi = std::numbers::pi_v<CoalScalar>;
   unsigned int tot = (unsigned int)(tot_for_unit_cone * r);
   CoalScalar phid = pi * 2 / tot;
 

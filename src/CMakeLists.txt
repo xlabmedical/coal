@@ -108,7 +108,6 @@ set(
   mesh_loader/assimp.cpp
   mesh_loader/loader.cpp
   hfield.cpp
-  serialization/serialization.cpp
 )
 
 if(COAL_HAS_OCTOMAP)
@@ -173,11 +172,6 @@ MODERNIZE_TARGET_LINK_LIBRARIES(
   TARGETS assimp::assimp
   LIBRARIES ${assimp_LIBRARIES}
   INCLUDE_DIRS ${assimp_INCLUDE_DIR}
-)
-
-target_link_libraries(
-  ${LIBRARY_NAME}
-  PUBLIC Boost::serialization Boost::filesystem
 )
 
 if(COAL_ENABLE_LOGGING)

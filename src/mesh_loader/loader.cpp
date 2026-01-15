@@ -37,8 +37,6 @@
 #include "coal/mesh_loader/loader.h"
 #include "coal/mesh_loader/assimp.h"
 
-#include <boost/filesystem.hpp>
-
 #ifdef COAL_HAS_OCTOMAP
 #include "coal/octree.h"
 #endif
@@ -104,17 +102,6 @@ BVHModelPtr_t CachedMeshLoader::load(const std::string& filename,
   Key key(filename, scale);
 
   std::time_t mtime = 0;
-  try {
-    mtime = boost::filesystem::last_write_time(filename);
-
-    Cache_t::const_iterator _cached = cache_.find(key);
-    if (_cached != cache_.end() && _cached->second.mtime == mtime)
-      // File found in cache and mtime is the same
-      return _cached->second.model;
-  } catch (boost::filesystem::filesystem_error&) {
-    // Could not stat. Make sure we will try to load the file so that
-    // there will be a file not found error.
-  }
 
   BVHModelPtr_t geom = MeshLoader::load(filename, scale);
   Value val;

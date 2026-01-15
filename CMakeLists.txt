@@ -64,11 +64,7 @@ option(
   "Turn some critical Coal asserts to exception."
   FALSE
 )
-option(
-  COAL_ENABLE_LOGGING
-  "Activate logging for warnings or error messages. Turned on by default in Debug."
-  FALSE
-)
+set(COAL_ENABLE_LOGGING FALSE) # Do not use since it depends on Boost.Log
 option(
   COAL_BACKWARD_COMPATIBILITY_WITH_HPP_FCL
   "Make Coal retro-compatible with HPP-FCL."
@@ -116,7 +112,6 @@ include("${JRL_CMAKE_MODULES}/base.cmake")
 COMPUTE_PROJECT_ARGS(PROJECT_ARGS LANGUAGES CXX)
 project(${PROJECT_NAME} ${PROJECT_ARGS})
 
-include("${JRL_CMAKE_MODULES}/boost.cmake")
 include("${JRL_CMAKE_MODULES}/python.cmake")
 include("${JRL_CMAKE_MODULES}/apple.cmake")
 include("${JRL_CMAKE_MODULES}/ide.cmake")
@@ -160,23 +155,12 @@ if(BUILD_PYTHON_INTERFACE)
 endif()
 
 # Required dependencies
-SET_BOOST_DEFAULT_OPTIONS()
-EXPORT_BOOST_DEFAULT_OPTIONS()
-ADD_PROJECT_DEPENDENCY(Boost REQUIRED serialization filesystem)
-if(COAL_ENABLE_LOGGING)
-  ADD_PROJECT_DEPENDENCY(Boost REQUIRED log)
-endif()
 if(BUILD_PYTHON_INTERFACE)
+  message(FATAL_ERROR "Unsupported for XLAB build")
   find_package(Boost REQUIRED COMPONENTS system)
 endif(BUILD_PYTHON_INTERFACE)
 
-if(Boost_VERSION_STRING VERSION_LESS 1.81)
-  # Default C++ version should be C++11
-  CHECK_MINIMAL_CXX_STANDARD(11 ENFORCE)
-else()
-  # Boost.Math will be C++14 starting in July 2023 (Boost 1.82 release)
-  CHECK_MINIMAL_CXX_STANDARD(14 ENFORCE)
-endif()
+CHECK_MINIMAL_CXX_STANDARD(20 ENFORCE)
 
 # Optional dependencies
 ADD_PROJECT_DEPENDENCY(octomap 1.8.0 PKG_CONFIG_REQUIRES "octomap >= 1.8")
@@ -295,29 +279,6 @@ set(
   include/coal/internal/traversal_node_shapes.h
   include/coal/internal/traversal_recurse.h
   include/coal/internal/traversal.h
-  include/coal/serialization/fwd.h
-  include/coal/serialization/serializer.h
-  include/coal/serialization/archive.h
-  include/coal/serialization/transform.h
-  include/coal/serialization/AABB.h
-  include/coal/serialization/BV_node.h
-  include/coal/serialization/BV_splitter.h
-  include/coal/serialization/BVH_model.h
-  include/coal/serialization/collision_data.h
-  include/coal/serialization/contact_patch.h
-  include/coal/serialization/collision_object.h
-  include/coal/serialization/convex.h
-  include/coal/serialization/eigen.h
-  include/coal/serialization/geometric_shapes.h
-  include/coal/serialization/memory.h
-  include/coal/serialization/OBB.h
-  include/coal/serialization/RSS.h
-  include/coal/serialization/OBBRSS.h
-  include/coal/serialization/kIOS.h
-  include/coal/serialization/kDOP.h
-  include/coal/serialization/hfield.h
-  include/coal/serialization/quadrilateral.h
-  include/coal/serialization/triangle.h
   include/coal/timings.h
 )
 
@@ -420,30 +381,6 @@ if(
     include/hpp/fcl/narrowphase/narrowphase.h
     include/hpp/fcl/narrowphase/support_functions.h
     include/hpp/fcl/octree.h
-    include/hpp/fcl/serialization/AABB.h
-    include/hpp/fcl/serialization/archive.h
-    include/hpp/fcl/serialization/BVH_model.h
-    include/hpp/fcl/serialization/BV_node.h
-    include/hpp/fcl/serialization/BV_splitter.h
-    include/hpp/fcl/serialization/collision_data.h
-    include/hpp/fcl/serialization/collision_object.h
-    include/hpp/fcl/serialization/contact_patch.h
-    include/hpp/fcl/serialization/convex.h
-    include/hpp/fcl/serialization/eigen.h
-    include/hpp/fcl/serialization/fwd.h
-    include/hpp/fcl/serialization/geometric_shapes.h
-    include/hpp/fcl/serialization/hfield.h
-    include/hpp/fcl/serialization/kDOP.h
-    include/hpp/fcl/serialization/kIOS.h
-    include/hpp/fcl/serialization/memory.h
-    include/hpp/fcl/serialization/OBB.h
-    include/hpp/fcl/serialization/OBBRSS.h
-    include/hpp/fcl/serialization/octree.h
-    include/hpp/fcl/serialization/quadrilateral.h
-    include/hpp/fcl/serialization/RSS.h
-    include/hpp/fcl/serialization/serializer.h
-    include/hpp/fcl/serialization/transform.h
-    include/hpp/fcl/serialization/triangle.h
     include/hpp/fcl/shape/convex.h
     include/hpp/fcl/shape/details/convex.hxx
     include/hpp/fcl/shape/geometric_shapes.h

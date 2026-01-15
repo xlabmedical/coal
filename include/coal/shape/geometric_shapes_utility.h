@@ -38,6 +38,7 @@
 #ifndef COAL_GEOMETRIC_SHAPES_UTILITY_H
 #define COAL_GEOMETRIC_SHAPES_UTILITY_H
 
+#include <array>
 #include <vector>
 #include "coal/shape/geometric_shapes.h"
 #include "coal/BV/BV.h"

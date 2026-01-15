@@ -38,6 +38,7 @@
 #ifndef COAL_GEOMETRIC_SHAPES_H
 #define COAL_GEOMETRIC_SHAPES_H
 
+#include <array>
 #include <vector>
 #include <memory>
 

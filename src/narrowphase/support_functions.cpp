@@ -138,7 +138,7 @@ inline void getShapeSupport(const Box* box, const Vec3s& dir, Vec3s& support,
                             int& /*unused*/, ShapeSupportData& /*unused*/) {
   // The inflate value is simply to make the specialized functions with box
   // have a preferred side for edge cases.
-  static const CoalScalar inflate = (dir.array() == 0).any() ? 1 + 1e-10 : 1.;
+  static const CoalScalar inflate = (dir.isZero(0)) ? 1 + 1e-10 : 1.;
   static const CoalScalar dummy_precision =
       Eigen::NumTraits<CoalScalar>::dummy_precision();
   Vec3s support1 = (dir.array() > dummy_precision).select(box->halfSide, 0);
